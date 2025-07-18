@@ -1,45 +1,87 @@
 import React, { useState } from 'react';
 
 function BudgetTracker() {
-  const [totalBudget, setTotalBudget] = useState(500000);
-  const [spentAmount, setSpentAmount] = useState(320000);
+  const [categories, setCategories] = useState([]);
+  const [newCategory, setNewCategory] = useState('');
+  const [newAmount, setNewAmount] = useState('');
 
-  const remaining = totalBudget - spentAmount;
+  const handleAddCategory = (e) => {
+    e.preventDefault();
+    if (newCategory && newAmount) {
+      setCategories([...categories, { name: newCategory, amount: Number(newAmount), spent: 0 }]);
+      setNewCategory('');
+      setNewAmount('');
+    }
+  };
+
+  const handleSpend = (index, amount) => {
+    const updated = [...categories];
+    updated[index].spent += Number(amount);
+    setCategories(updated);
+  };
 
   return (
-    <div style={{ padding: '2rem', background: '#f4f4f4', minHeight: '100vh' }}>
-      <h1 style={{ color: '#6a0dad' }}>Budget Tracker</h1>
-      <form style={{ marginTop: '1rem' }}>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Total Budget (KSH): </label>
+    <div className="container py-4" style={{ background: '#e8e6df', minHeight: '100vh' }}>
+      <h1 className="mb-4 text-success">Budget Tracker</h1>
+
+      <form onSubmit={handleAddCategory} className="row g-2 mb-4">
+        <div className="col-md-4">
           <input
-            type="number"
-            value={totalBudget}
-            onChange={(e) => setTotalBudget(Number(e.target.value))}
-            style={{ padding: '0.5rem', borderRadius: '8px', border: '1px solid #ccc' }}
+            type="text"
+            className="form-control"
+            placeholder="Category Name"
+            value={newCategory}
+            onChange={(e) => setNewCategory(e.target.value)}
+            required
           />
         </div>
-        <div>
-          <label>Spent Amount (KSH): </label>
+        <div className="col-md-4">
           <input
             type="number"
-            value={spentAmount}
-            onChange={(e) => setSpentAmount(Number(e.target.value))}
-            style={{ padding: '0.5rem', borderRadius: '8px', border: '1px solid #ccc' }}
+            className="form-control"
+            placeholder="Budget Amount"
+            value={newAmount}
+            onChange={(e) => setNewAmount(e.target.value)}
+            required
           />
+        </div>
+        <div className="col-md-4">
+          <button type="submit" className="btn btn-success w-100">Add Category</button>
         </div>
       </form>
 
-      <div style={{
-        background: 'white',
-        padding: '1rem',
-        borderRadius: '12px',
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-        marginTop: '1rem'
-      }}>
-        <p>Total Budget: KSH {totalBudget.toLocaleString()}</p>
-        <p>Spent: KSH {spentAmount.toLocaleString()}</p>
-        <p>Remaining: KSH {remaining.toLocaleString()}</p>
+      <div className="row">
+        {categories.map((cat, idx) => (
+          <div key={idx} className="col-md-4 mb-3">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">{cat.name}</h5>
+                <p className="card-text">Budgeted: KSH {cat.amount.toLocaleString()}</p>
+                <p className="card-text">Spent: KSH {cat.spent.toLocaleString()}</p>
+                <p className="card-text">Remaining: KSH {(cat.amount - cat.spent).toLocaleString()}</p>
+
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const amount = e.target.elements['spend'].value;
+                    handleSpend(idx, amount);
+                    e.target.reset();
+                  }}
+                  className="d-flex"
+                >
+                  <input
+                    type="number"
+                    name="spend"
+                    className="form-control me-2"
+                    placeholder="Add Expense"
+                    required
+                  />
+                  <button type="submit" className="btn btn-outline-success">Add</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

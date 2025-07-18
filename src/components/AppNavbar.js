@@ -1,17 +1,20 @@
-import React from 'react';
-
 function AppNavbar() {
   return (
     <nav style={{
-      background: '#6a0dad',
-      color: 'white',
-      padding: '1rem',
+      background: '#1e3d32',
+      color: '#f5f2eb',
+      padding: '0.8rem 1.5rem',
       display: 'flex',
+      alignItems: 'center',
       justifyContent: 'space-between',
-      alignItems: 'center'
+      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
     }}>
-      <h2 style={{ margin: 0 }}>Finstack</h2>
-      <div>User Profile</div>
+      <div style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
+        Finstack
+      </div>
+      <div style={{ fontSize: '0.95rem' }}>
+        Finance Dashboard
+      </div>
     </nav>
   );
 }

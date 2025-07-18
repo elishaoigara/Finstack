@@ -6,36 +6,54 @@ function RoiCalculator() {
 
   const roi = ((returnAmount - investment) / investment * 100).toFixed(2);
 
+  const inputStyle = {
+    padding: '0.6rem',
+    borderRadius: '8px',
+    border: '1px solid #ccc',
+    width: '100%',
+    maxWidth: '300px',
+  };
+
+  const labelStyle = {
+    marginBottom: '0.5rem',
+    color: '#1e3d32',
+    fontWeight: '500',
+  };
+
   return (
-    <div style={{ padding: '2rem', background: '#f4f4f4', minHeight: '100vh' }}>
-      <h1 style={{ color: '#6a0dad' }}>ROI Calculator</h1>
-      <form style={{ marginTop: '1rem' }}>
+    <div style={{ padding: '2rem', background: '#e8e6df', minHeight: '100vh' }}>
+      <h1 style={{ color: '#1e3d32' }}>ROI Calculator</h1>
+
+      <form style={{ marginTop: '1.5rem' }}>
         <div style={{ marginBottom: '1rem' }}>
-          <label>Investment (KSH): </label>
+          <label style={labelStyle}>Investment (KSH):</label><br />
           <input
             type="number"
             value={investment}
             onChange={(e) => setInvestment(Number(e.target.value))}
-            style={{ padding: '0.5rem', borderRadius: '8px', border: '1px solid #ccc' }}
+            style={inputStyle}
           />
         </div>
-        <div>
-          <label>Return Amount (KSH): </label>
+
+        <div style={{ marginBottom: '1rem' }}>
+          <label style={labelStyle}>Return Amount (KSH):</label><br />
           <input
             type="number"
             value={returnAmount}
             onChange={(e) => setReturnAmount(Number(e.target.value))}
-            style={{ padding: '0.5rem', borderRadius: '8px', border: '1px solid #ccc' }}
+            style={inputStyle}
           />
         </div>
       </form>
 
       <div style={{
-        background: 'white',
-        padding: '1rem',
+        background: '#f5f2eb',
+        padding: '1.5rem',
         borderRadius: '12px',
         boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-        marginTop: '1rem'
+        marginTop: '2rem',
+        color: '#1e3d32',
+        fontWeight: '500',
       }}>
         <p>Investment: KSH {investment.toLocaleString()}</p>
         <p>Return: KSH {returnAmount.toLocaleString()}</p>
