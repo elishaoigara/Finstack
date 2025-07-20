@@ -1,3 +1,4 @@
+// src/components/AppNavbar.js
 import React from 'react';
 import { Navbar, Container, Dropdown, Image } from 'react-bootstrap';
 import { motion } from 'framer-motion';
@@ -10,7 +11,6 @@ function AppNavbar() {
       color: '#fff',
     }}>
       <Container fluid className="d-flex justify-content-between align-items-center">
-
         {/* Animated Brand */}
         <motion.div
           initial={{ opacity: 0, x: -10 }}
@@ -23,8 +23,7 @@ function AppNavbar() {
             color: '#ffffff',
             letterSpacing: '0.5px'
           }}>
-            <span role="img" aria-label="briefcase" style={{ marginRight: '0.5rem' }}>💼</span>
-            Finstack
+            💼 Finstack
           </Navbar.Brand>
         </motion.div>
 
