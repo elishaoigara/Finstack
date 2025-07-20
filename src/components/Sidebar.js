@@ -8,13 +8,14 @@ function Sidebar() {
   const sidebarStyle = {
     width: isOpen ? '220px' : '60px',
     minHeight: '100vh',
-    background: '#1e3d32',
+    background: '#14532d', // deep green
     padding: '1rem 0',
-    color: '#f5f2eb',
+    color: '#e6ffed', // light mint
     display: 'flex',
     flexDirection: 'column',
     gap: '0.5rem',
     transition: 'width 0.3s ease',
+    boxShadow: '2px 0 5px rgba(0,0,0,0.1)',
   };
 
   const linkBaseStyle = {
@@ -23,18 +24,18 @@ function Sidebar() {
     display: 'flex',
     alignItems: 'center',
     gap: '0.75rem',
-    color: '#f5f2eb',
+    color: '#e6ffed',
     transition: 'background 0.2s, transform 0.2s',
   };
 
   const hoverStyle = {
-    background: '#2b5444',
+    background: '#166534', // lighter green for hover
   };
 
   const toggleButtonStyle = {
     background: 'transparent',
     border: 'none',
-    color: '#f5f2eb',
+    color: '#e6ffed',
     fontSize: '1.2rem',
     cursor: 'pointer',
     padding: '0.5rem 1rem',
@@ -55,6 +56,8 @@ function Sidebar() {
             marginBottom: '2rem',
             fontWeight: 'bold',
             fontSize: '1.2rem',
+            letterSpacing: '1px',
+            color: '#d1fae5',
           }}
         >
           Finstack
@@ -71,7 +74,7 @@ function Sidebar() {
           to={path}
           style={({ isActive }) => ({
             ...linkBaseStyle,
-            background: isActive ? '#2b5444' : 'transparent',
+            background: isActive ? '#166534' : 'transparent',
             fontWeight: isActive ? 'bold' : 'normal',
             borderRadius: '0 20px 20px 0',
             transform: isActive ? 'translateX(4px)' : 'none',
