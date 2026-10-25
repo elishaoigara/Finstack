@@ -4,7 +4,7 @@ function RoiCalculator() {
   const [investment, setInvestment] = useState(200000);
   const [returnAmount, setReturnAmount] = useState(224000);
 
-  const roi = ((returnAmount - investment) / investment * 100).toFixed(2);
+  const roi = investment ? (((returnAmount - investment) / investment) * 100).toFixed(2) : '0.00';
 
   const inputStyle = {
     padding: '0.6rem',

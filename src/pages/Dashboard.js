@@ -1,7 +1,19 @@
 import React from 'react';
 
-function Dashboard({ totalBudget, spentAmount, roiPercentage, complianceStatus, expenses = [] }) {
-  const remaining = totalBudget - spentAmount;
+function Dashboard({
+  totalBudget = 800000,
+  spentAmount = 250000,
+  roiPercentage = 18,
+  complianceStatus = 'Up to Date',
+  expenses = [
+    { name: 'Office Rent', amount: 100000 },
+    { name: 'Equipment', amount: 50000 },
+    { name: 'Transport', amount: 20000 },
+  ],
+}) {
+  const safeTotalBudget = Number(totalBudget) || 0;
+  const safeSpentAmount = Number(spentAmount) || 0;
+  const remaining = safeTotalBudget - safeSpentAmount;
 
   return (
     <div className="container-fluid py-4" style={{ background: '#e8e6df', minHeight: '100vh' }}>
@@ -9,8 +21,8 @@ function Dashboard({ totalBudget, spentAmount, roiPercentage, complianceStatus, 
 
       <div className="row">
         {[
-          { label: 'Total Budget', value: `KSH ${totalBudget.toLocaleString()}`, color: 'primary' },
-          { label: 'Spent', value: `KSH ${spentAmount.toLocaleString()}`, color: 'danger' },
+          { label: 'Total Budget', value: `KSH ${safeTotalBudget.toLocaleString()}`, color: 'primary' },
+          { label: 'Spent', value: `KSH ${safeSpentAmount.toLocaleString()}`, color: 'danger' },
           { label: 'Remaining', value: `KSH ${remaining.toLocaleString()}`, color: 'success' },
         ].map((item, idx) => (
           <div key={idx} className="col-md-4 mb-3">
