@@ -4,7 +4,7 @@ import Footer from './components/Footer';
 import Dashboard from './pages/Dashboard';
 import BudgetTracker from './pages/BudgetTracker';
 import RoiCalculator from './pages/RoiCalculator';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -34,6 +34,7 @@ function App() {
             />
             <Route path="/budget" element={<BudgetTracker />} />
             <Route path="/roi" element={<RoiCalculator />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
 
